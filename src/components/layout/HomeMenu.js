@@ -37,7 +37,7 @@ export default function HomeMenu() {
             {products.map((product, index) => (
               <div
                 key={index}
-                className="flex flex-col text-center p-4 border rounded-lg h-[420px]"
+                className="flex flex-col text-center p-4 rounded-lg h-[420px]"
               >
                 {/* Image */}
                 <div className="w-full h-[220px] overflow-hidden rounded-md mb-4">

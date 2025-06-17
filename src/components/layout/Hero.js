@@ -3,8 +3,8 @@ import RightArrow from '../icons/RightArrow';
 
 export default function Hero() {
     return (
-        <section className="hero gap-15">
-            <div className="py-12"> 
+        <section className="hero gap-18">
+            <div className="py-30"> 
                 <h1 className="text-8xl font-semibold ">
                     Everything<br/>
                     is better <br />
@@ -30,8 +30,13 @@ export default function Hero() {
 
             </div>
            
-            <div className='relative'>
-                <Image src={'/LabubuBrown.png'} alt={'LabubuBrown'} layout={'fill'} objectFit={'con'}/>
+            <div className="relative w-[750px] h-[750px]">
+                <Image
+                    src="/LabubuBrown.png"
+                    alt="LabubuBrown"
+                    layout="fill"
+                    objectFit="contain"
+                />
             </div>
             
         </section>

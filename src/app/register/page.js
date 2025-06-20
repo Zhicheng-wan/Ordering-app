@@ -6,18 +6,36 @@ export default function RegisterPage() {
     const [password, setPassword] = useState('');
     const [creatingUser, setCreatingUser] = useState(false);
     const [userCreated, setUserCreated] = useState(false);
+    const [error, setError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault();
+        // reset states
         setCreatingUser(true);
-        fetch('/api/register', {
+        setError(false);
+        setUserCreated(false);
+        setErrorMessage('');
+
+        const response = await fetch('/api/register', {
             method: 'POST',
             body: JSON.stringify({ email, password }),
             headers: {
                 'Content-Type': 'application/json',
             },
         })
+
+        if (response.ok){
+            setUserCreated(true);
+        }
+        else{
+            const errorData = await response.json();
+            setError(true);
+            setErrorMessage(errorData.message || 'An error occurred while creating the user.');
+        }
         setCreatingUser(false);
+
+        
     }
 
     return (
@@ -55,7 +73,16 @@ export default function RegisterPage() {
                         Register
                     </button>
                 </form>
-
+                {userCreated && (
+                    <div className="mt-4 text-green-600 text-center">
+                        User created successfully!
+                    </div>
+                )}
+                {error && (
+                    <div className="mt-4 text-red-600 text-center">
+                        {errorMessage || 'An error occurred while creating the user.'}
+                    </div>
+                )}
                 {/* Divider */}
                 <div className="flex items-center my-6">
                     <hr className="flex-grow border-gray-300" />
@@ -71,7 +98,19 @@ export default function RegisterPage() {
                     <img src="/Google.webp" alt="Google" className="w-5 h-5" />
                     <span className="text-sm font-medium text-gray-700">Login with Google</span>
                     </button>
+
+                    <div className="mt-4 text-center">
+                        <p className="text-sm text-gray-600">
+                            Already have an account?{' '}
+                            <a href="/login" className="text-primary hover:underline">
+                                Login here
+                            </a>
+                        </p>
+                    </div>
                 </div>
+
+
+
         </div>
     );
 }

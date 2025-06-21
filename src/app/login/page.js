@@ -11,9 +11,21 @@ export default function LoginPage() {
         event.preventDefault();
         setLoginInProgress(true);
         // Handle login logic here
-        await signIn('credentials',{email, password});
-        
+        const result = await signIn('credentials', {
+            redirect: false,
+            username: email,
+            password,
+        });
+
         setLoginInProgress(false);
+        // redirect if login is successful
+        if (result?.ok) {
+            window.location.href = '/'; // Redirect to home page
+        } else {
+            // Handle login error
+            console.error('Login failed:', result?.error);
+            alert('Login failed. Please check your credentials and try again.');
+        }
     }
 
 
@@ -51,7 +63,7 @@ export default function LoginPage() {
                     <button
                         disabled={loginInProgress}
                         type="submit"
-                        className="w-full bg-primary text-white py-2 rounded hover:bg-red-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="cursor-pointer w-full bg-primary text-white py-2 rounded hover:bg-red-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         Login
                     </button>
@@ -66,7 +78,7 @@ export default function LoginPage() {
                     {/* Login with Google */}
                     <button
                     onClick={() => console.log("Login with Google")} // Replace with actual handler
-                    className="w-full flex items-center justify-center gap-3 border border-gray-300 py-2 rounded hover:bg-gray-50 transition"
+                    className="cursor-pointer w-full flex items-center justify-center gap-3 border border-gray-300 py-2 rounded hover:bg-gray-50 transition"
                     >
                     <img src="/Google.webp" alt="Google" className="w-5 h-5" />
                     <span className="text-sm font-medium text-gray-700">Login with Google</span>

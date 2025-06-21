@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { User } from "@/app/models/User";
+import { User } from "@/models/User";
 import bcrypt from "bcrypt";
 
 export async function POST(req) {

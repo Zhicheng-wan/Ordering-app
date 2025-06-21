@@ -34,8 +34,9 @@ export default function Hero() {
                 <Image
                     src="/LabubuBrown.png"
                     alt="LabubuBrown"
-                    layout="fill"
-                    objectFit="contain"
+                    fill
+                    className="object-contain"
+                    priority
                 />
             </div>
             

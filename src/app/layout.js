@@ -2,7 +2,7 @@ import { Roboto } from "next/font/google";
 import Header from "@/components/layout/Header";
 
 import "./globals.css";
-
+import { AppProvider } from "@/components/AppContext";
 const roboto = Roboto({
   subsets: ["latin"],
   variable: "--font-roboto",
@@ -21,8 +21,10 @@ export default function RootLayout({ children }) {
         <body className={`${roboto.variable} antialiased`}>
 
           <main className="max-w-7xl mx-auto px-4">
-            <Header />
-            {children}
+            <AppProvider>
+              <Header />
+              {children}
+            </AppProvider>
           </main>
         </body>
     </html>

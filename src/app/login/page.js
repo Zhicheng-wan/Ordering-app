@@ -12,20 +12,12 @@ export default function LoginPage() {
         setLoginInProgress(true);
         // Handle login logic here
         const result = await signIn('credentials', {
-            redirect: false,
             username: email,
             password,
+            callbackUrl: '/', // Redirect to home page after login
         });
+        
 
-        setLoginInProgress(false);
-        // redirect if login is successful
-        if (result?.ok) {
-            window.location.href = '/'; // Redirect to home page
-        } else {
-            // Handle login error
-            console.error('Login failed:', result?.error);
-            alert('Login failed. Please check your credentials and try again.');
-        }
     }
 
 
@@ -77,11 +69,11 @@ export default function LoginPage() {
 
                     {/* Login with Google */}
                     <button
-                    onClick={() => console.log("Login with Google")} // Replace with actual handler
-                    className="cursor-pointer w-full flex items-center justify-center gap-3 border border-gray-300 py-2 rounded hover:bg-gray-50 transition"
-                    >
-                    <img src="/Google.webp" alt="Google" className="w-5 h-5" />
-                    <span className="text-sm font-medium text-gray-700">Login with Google</span>
+                        onClick={() => signIn('google', {callbackUrl:"/"})} // Replace with actual handler
+                        className="cursor-pointer w-full flex items-center justify-center gap-3 border border-gray-300 py-2 rounded hover:bg-gray-50 transition"
+                        >
+                        <img src="/Google.webp" alt="Google" className="w-5 h-5" />
+                        <span className="text-sm font-medium text-gray-700">Login with Google</span>
                     </button>
 
             </div>

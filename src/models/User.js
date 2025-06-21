@@ -2,6 +2,10 @@ import {Schema, model, models} from 'mongoose';
 
 
 const UserSchema = new Schema({
+    name: {
+        type: String,
+        required: true,
+    },
     email: {
         type: String,
         required: true,
@@ -9,7 +13,6 @@ const UserSchema = new Schema({
     },
     password: {
         type: String,
-        required: true,
         validate: pass =>{
             if(!pass || pass.length < 5) {
                 throw new Error('Password must be at least 5 characters long');

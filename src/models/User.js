@@ -18,7 +18,11 @@ const UserSchema = new Schema({
                 throw new Error('Password must be at least 5 characters long');
             }
         }
-    }
+    },
+    image: {
+        type: String,
+    },
+
 }, {timestamps: true});
 
 export const User = models.User || model('User', UserSchema);

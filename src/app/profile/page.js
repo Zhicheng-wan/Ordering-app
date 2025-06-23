@@ -10,6 +10,7 @@ export default function ProfilePage() {
     const [avatar, setAvatar] = useState('');
     const [save, setSave] = useState(false);
     const [isSaving, setIsSaving] = useState(false);
+    const [isUploading, setIsUploading] = useState(true);
 
     useEffect(() => {
         if (status === "authenticated" && session) {
@@ -40,28 +41,49 @@ export default function ProfilePage() {
         );
     }
 
-  async function handleSave(event) {
-    event.preventDefault();
-    setSave(false);
-    setIsSaving(true);
-    const response = await fetch('/api/profile', {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            name: name
-        }),
-    })
+    async function handleSave(event) {
+      event.preventDefault();
+      setSave(false);
+      setIsSaving(true);
+      const response = await fetch('/api/profile', {
+          method: 'PUT',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+              name: name,
+              avatar: avatar,
+          }),
+      })
 
-    setIsSaving(false);
-    setSave(true);
-    
-  }
+      setIsSaving(false);
+      setSave(true);
+      
+    }
 
-  function handleChangeAvatar() {
-    alert('Avatar upload functionality coming soon!');
-  }
+    async function handleChangeAvatar(e) {
+        const files = e.target.files;
+
+        if (files && files.length > 0) {
+          const data = new FormData();
+          data.set('file', files[0]);
+
+          setIsUploading(true);
+
+          const response = await fetch ('/api/upload', {
+            method: 'POST',
+            body: data,
+          });
+
+          const json = await response.json();
+          const fileUrl = json.fileUrl;
+          
+          setAvatar(fileUrl);
+          setIsUploading(false);
+        }
+
+        
+    }
 
   return (
     <div className="flex items-center justify-center min-h-screen">
@@ -128,15 +150,21 @@ export default function ProfilePage() {
           </button>
 
           {save &&(
-            <h2 className="text-green-600 text-center mb-4 mt-4">
+            <h2 className="text-green-600 text-center mb-4 mt-4 py-2 rounded font-semibold transition">
               Profile saved!
             </h2>
           )} 
+          {isUploading && (
+            <h2 className="text-blue-600 text-center mb-4 mt-4 py-2 rounded font-semibold transition">
+              Uploading...
+            </h2>
+          )}
           {isSaving && (
-            <h2 className="text-blue-600 text-center mb-4 mt-4">
+            <h2 className="text-blue-600 text-center mb-4 mt-4 py-2 rounded font-semibold transition">
               Saving...
             </h2>
           )}
+          
 
         </form>
       </div>

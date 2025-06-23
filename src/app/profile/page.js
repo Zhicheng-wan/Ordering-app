@@ -1,4 +1,5 @@
 'use client';
+import InfoBox, { SuccessBox } from "@/components/layout/InfoBox";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
@@ -10,7 +11,7 @@ export default function ProfilePage() {
     const [avatar, setAvatar] = useState('');
     const [save, setSave] = useState(false);
     const [isSaving, setIsSaving] = useState(false);
-    const [isUploading, setIsUploading] = useState(true);
+    const [isUploading, setIsUploading] = useState(false);
 
     useEffect(() => {
         if (status === "authenticated" && session) {
@@ -150,19 +151,14 @@ export default function ProfilePage() {
           </button>
 
           {save &&(
-            <h2 className="text-green-600 text-center mb-4 mt-4 py-2 rounded font-semibold transition">
-              Profile saved!
-            </h2>
+            <SuccessBox>  Profile saved! </SuccessBox>   
           )} 
           {isUploading && (
-            <h2 className="text-blue-600 text-center mb-4 mt-4 py-2 rounded font-semibold transition">
-              Uploading...
-            </h2>
+            <InfoBox>  Uploading... </InfoBox>     
+  
           )}
           {isSaving && (
-            <h2 className="text-blue-600 text-center mb-4 mt-4 py-2 rounded font-semibold transition">
-              Saving...
-            </h2>
+            <InfoBox>  Saving...  </InfoBox>
           )}
           
 

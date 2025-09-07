@@ -43,8 +43,8 @@ export const authOptions = {
         await mongoose.connect(process.env.MONGO_URI);
         const dbUser = await User.findOne({ email: session.user.email });
         if (dbUser) {
-          session.user.admin = dbUser.admin; // ✅ Include admin
-          session.user._id = dbUser._id;      // (optional) Include _id
+          session.user.admin = dbUser.admin; 
+          session.user._id = dbUser._id;     
         }
       }
       return session;

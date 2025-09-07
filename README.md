@@ -1,4 +1,4 @@
-# Labubu E-commerce App 
+# Labubu E-commerce App
 
 Click to [View](https://ordering-app-sepia.vercel.app/)
 
@@ -7,18 +7,18 @@ Click to [View](https://ordering-app-sepia.vercel.app/)
 Labubu E-commerce App is a full-stack web application built with Next.js 13+, MongoDB, and NextAuth that enables users to browse and purchase collectible figures and toys.
 
 Key Features
-* 🔐 Authentication with NextAuth (Google & Credentials)
 
-* 🛒 Product Listings with images, titles, and prices
+- 🔐 Authentication with NextAuth (Google & Credentials)
 
-* 🧾 User Registration & Login
+- 🛒 Product Listings with images, titles, and prices
 
-* 👤 Session-aware Navigation (Login/Profile/Logout)
+- 🧾 User Registration & Login
 
-* ⚙️ MongoDB Integration for storing users and product data
+- 👤 Session-aware Navigation (Login/Profile/Logout)
 
-* 💅 Responsive UI with Tailwind CSS
+- ⚙️ MongoDB Integration for storing users and product data
 
-* prefer 3rd party login 
-* login with creditials - comment the following in auth // adapter: MongoDBAdapter(clientPromise),
+- 💅 Responsive UI with Tailwind CSS
 
+- prefer 3rd party login
+- login with creditials - comment the following in auth // adapter: MongoDBAdapter(clientPromise),

@@ -4,8 +4,8 @@ import { useEffect, useMemo, useState } from 'react';
 import InfoBox, { SuccessBox } from '@/components/layout/InfoBox';
 
 export default function ProductItemsPage() {
-  const [view, setView] = useState('create');              // 'create' | 'list'
-  const [editingId, setEditingId] = useState(null);        // mongo _id when editing
+  const [view, setView] = useState('create'); // 'create' | 'list'
+  const [editingId, setEditingId] = useState(null); // mongo _id when editing
 
   // form state
   const [name, setName] = useState('');
@@ -25,7 +25,7 @@ export default function ProductItemsPage() {
 
   // UI niceties
   const [query, setQuery] = useState('');
-  const [sortBy, setSortBy] = useState('newest');          // 'newest' | 'price-asc' | 'price-desc'
+  const [sortBy, setSortBy] = useState('newest'); // 'newest' | 'price-asc' | 'price-desc'
 
   /* ---------------- Upload ---------------- */
   async function handleImageUpload(e) {
@@ -146,15 +146,11 @@ export default function ProductItemsPage() {
     let data = items;
     if (q) {
       data = data.filter(
-        (it) =>
-          it.name?.toLowerCase().includes(q) ||
-          it.description?.toLowerCase().includes(q)
+        (it) => it.name?.toLowerCase().includes(q) || it.description?.toLowerCase().includes(q),
       );
     }
     if (sortBy === 'newest') {
-      data = [...data].sort(
-        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-      );
+      data = [...data].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     } else if (sortBy === 'price-asc') {
       data = [...data].sort((a, b) => Number(a.price) - Number(b.price));
     } else if (sortBy === 'price-desc') {
@@ -216,12 +212,15 @@ export default function ProductItemsPage() {
               ) : (
                 <label className="cursor-pointer bg-gray-50 border border-dashed border-gray-300 w-40 h-40 flex items-center justify-center rounded-xl hover:bg-gray-100">
                   <span className="text-sm text-gray-600">Click to Upload</span>
-                  <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" />
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                    className="hidden"
+                  />
                 </label>
               )}
-              {!imageUrl && (
-                <p className="text-xs text-gray-500 mt-1">Image is required.</p>
-              )}
+              {!imageUrl && <p className="text-xs text-gray-500 mt-1">Image is required.</p>}
             </div>
 
             <label className="block">
@@ -268,13 +267,21 @@ export default function ProductItemsPage() {
                   : 'bg-gray-400 cursor-not-allowed'
               }`}
             >
-              {editingId ? (isSaving ? 'Updating…' : 'Update Product') : (isSaving ? 'Creating…' : 'Create Product')}
+              {editingId
+                ? isSaving
+                  ? 'Updating…'
+                  : 'Update Product'
+                : isSaving
+                  ? 'Creating…'
+                  : 'Create Product'}
             </button>
 
             {isUploading && <InfoBox>Uploading image...</InfoBox>}
             {isSaving && !editingId && <InfoBox>Saving product...</InfoBox>}
             {saveError && <InfoBox>{saveError}</InfoBox>}
-            {saved && <SuccessBox>{editingId ? 'Product updated!' : 'Product created!'}</SuccessBox>}
+            {saved && (
+              <SuccessBox>{editingId ? 'Product updated!' : 'Product created!'}</SuccessBox>
+            )}
           </form>
         </div>
       ) : (
@@ -288,7 +295,7 @@ export default function ProductItemsPage() {
                 onClick={loadItems}
                 className="px-3 py-2 text-sm rounded-lg border border-gray-300 bg-white hover:bg-gray-50"
               >
-                 Refresh
+                Refresh
               </button>
               <span className="self-center text-sm text-gray-500">
                 {loadingList ? 'Loading…' : `${items.length} item(s)`}
@@ -346,7 +353,9 @@ export default function ProductItemsPage() {
                   <div className="flex items-start justify-between gap-3">
                     <div>
                       <div className="text-lg font-semibold leading-tight">{it.name}</div>
-                      <div className="mt-1 text-sm text-gray-600 line-clamp-2">{it.description}</div>
+                      <div className="mt-1 text-sm text-gray-600 line-clamp-2">
+                        {it.description}
+                      </div>
                     </div>
                     <div className="shrink-0 rounded-lg bg-gray-100 px-2.5 py-1 text-sm font-semibold">
                       ${Number(it.price).toFixed(2)}

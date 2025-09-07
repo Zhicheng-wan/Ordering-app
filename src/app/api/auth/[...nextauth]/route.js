@@ -1,6 +1,6 @@
-import NextAuth from "next-auth";
+import NextAuth from 'next-auth';
 
-import { authOptions } from "@/libs/authOptions"; // or "@/libs/authOptions"
+import { authOptions } from '@/libs/authOptions'; // or "@/libs/authOptions"
 
 const handler = NextAuth(authOptions);
 

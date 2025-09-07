@@ -1,22 +1,22 @@
-"use client";
-import { useState } from "react";
-import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+'use client';
+import { useState } from 'react';
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [loginInProgress, setLoginInProgress] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const router = useRouter();
 
   async function handleLogin(e) {
     e.preventDefault();
     setLoginInProgress(true);
-    setError("");
+    setError('');
 
-    const result = await signIn("credentials", {
-      redirect: false,     
+    const result = await signIn('credentials', {
+      redirect: false,
       email,
       password,
     });
@@ -24,9 +24,9 @@ export default function LoginPage() {
     setLoginInProgress(false);
 
     if (result?.ok) {
-      router.push("/");    
+      router.push('/');
     } else {
-      setError("Invalid email or password.");
+      setError('Invalid email or password.');
     }
   }
 
@@ -36,7 +36,9 @@ export default function LoginPage() {
         <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
         <form onSubmit={handleLogin}>
           <div className="mb-4">
-            <label className="block text-sm font-medium mb-2" htmlFor="email">Email</label>
+            <label className="block text-sm font-medium mb-2" htmlFor="email">
+              Email
+            </label>
             <input
               name="email"
               value={email}
@@ -49,7 +51,9 @@ export default function LoginPage() {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-sm font-medium mb-2" htmlFor="password">Password</label>
+            <label className="block text-sm font-medium mb-2" htmlFor="password">
+              Password
+            </label>
             <input
               name="password"
               value={password}
@@ -66,7 +70,7 @@ export default function LoginPage() {
             type="submit"
             className="cursor-pointer w-full bg-primary text-white py-2 rounded hover:bg-red-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {loginInProgress ? "Logging in…" : "Login"}
+            {loginInProgress ? 'Logging in…' : 'Login'}
           </button>
         </form>
 
@@ -79,7 +83,7 @@ export default function LoginPage() {
         </div>
 
         <button
-          onClick={() => signIn("google", { callbackUrl: "/" })}
+          onClick={() => signIn('google', { callbackUrl: '/' })}
           className="cursor-pointer w-full flex items-center justify-center gap-3 border border-gray-300 py-2 rounded hover:bg-gray-50 transition"
         >
           <img src="/Google.webp" alt="Google" className="w-5 h-5" />

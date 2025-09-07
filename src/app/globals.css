@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
   --background: #ffffff;
@@ -12,7 +12,7 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@theme{
+@theme {
   --color-primary: #f13a01;
 }
 
@@ -29,7 +29,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-section.hero{
+section.hero {
   @apply grid;
-  grid-template-columns: .4fr 1fr;
+  grid-template-columns: 0.4fr 1fr;
 }

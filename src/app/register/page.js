@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import { useState } from 'react';
 import { signIn } from 'next-auth/react';
 
@@ -44,7 +44,9 @@ export default function RegisterPage() {
 
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label className="block text-sm font-medium mb-2" htmlFor="name">Name</label>
+            <label className="block text-sm font-medium mb-2" htmlFor="name">
+              Name
+            </label>
             <input
               disabled={creatingUser}
               type="text"
@@ -57,7 +59,9 @@ export default function RegisterPage() {
           </div>
 
           <div className="mb-4">
-            <label className="block text-sm font-medium mb-2" htmlFor="email">Email</label>
+            <label className="block text-sm font-medium mb-2" htmlFor="email">
+              Email
+            </label>
             <input
               disabled={creatingUser}
               type="email"
@@ -70,7 +74,9 @@ export default function RegisterPage() {
           </div>
 
           <div className="mb-4">
-            <label className="block text-sm font-medium mb-2" htmlFor="password">Password</label>
+            <label className="block text-sm font-medium mb-2" htmlFor="password">
+              Password
+            </label>
             <input
               disabled={creatingUser}
               type="password"
@@ -92,7 +98,9 @@ export default function RegisterPage() {
           </button>
         </form>
 
-        {userCreated && <div className="mt-4 text-green-600 text-center">User created successfully!</div>}
+        {userCreated && (
+          <div className="mt-4 text-green-600 text-center">User created successfully!</div>
+        )}
         {error && <div className="mt-4 text-red-600 text-center">{errorMessage}</div>}
 
         {/* Divider */}
@@ -104,7 +112,7 @@ export default function RegisterPage() {
 
         {/* Google */}
         <button
-          onClick={() => signIn('google', { callbackUrl: "/" })}
+          onClick={() => signIn('google', { callbackUrl: '/' })}
           className="cursor-pointer w-full flex items-center justify-center gap-3 border border-gray-300 py-2 rounded hover:bg-gray-50 transition"
         >
           <img src="/Google.webp" alt="Google" className="w-5 h-5" />
@@ -114,7 +122,9 @@ export default function RegisterPage() {
         <div className="mt-4 text-center">
           <p className="text-sm text-gray-600">
             Already have an account?{' '}
-            <a href="/login" className="cursor-pointer text-primary hover:underline">Login here</a>
+            <a href="/login" className="cursor-pointer text-primary hover:underline">
+              Login here
+            </a>
           </p>
         </div>
       </div>

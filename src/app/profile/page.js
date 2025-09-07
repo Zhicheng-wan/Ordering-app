@@ -1,9 +1,9 @@
 'use client';
-import InfoBox, { SuccessBox } from "@/components/layout/InfoBox";
-import ProductItemsPage from "@/product-items/page";
-import AdminUserPage from "@/users/page";
-import { useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
+import InfoBox, { SuccessBox } from '@/components/layout/InfoBox';
+import ProductItemsPage from '@/product-items/page';
+import AdminUserPage from '@/users/page';
+import { useSession } from 'next-auth/react';
+import { useEffect, useState } from 'react';
 
 export default function ProfilePage() {
   const { data: session, status } = useSession();
@@ -25,7 +25,7 @@ export default function ProfilePage() {
   const [urlError, setUrlError] = useState('');
 
   useEffect(() => {
-    if (status === "authenticated" && session) {
+    if (status === 'authenticated' && session) {
       setName(session.user.name || '');
       setEmail(session.user.email || '');
       setAvatar(session.user.image || '');
@@ -33,7 +33,7 @@ export default function ProfilePage() {
     }
   }, [session, status]);
 
-  if (status === "loading") {
+  if (status === 'loading') {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
@@ -43,7 +43,7 @@ export default function ProfilePage() {
     );
   }
 
-  if (status === "unauthenticated") {
+  if (status === 'unauthenticated') {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
@@ -107,7 +107,7 @@ export default function ProfilePage() {
       setUrlError(
         looksLikeImage
           ? "That URL didn't load. The site may block hotlinking."
-          : "This isn't a direct image URL. Use a link that ends with .png/.jpg/.webp, etc."
+          : "This isn't a direct image URL. Use a link that ends with .png/.jpg/.webp, etc.",
       );
       return;
     }
@@ -146,8 +146,6 @@ export default function ProfilePage() {
                   onChange={handleChangeAvatar}
                 />
               </label>
-
-              
             </div>
 
             {showUrlBox && (
@@ -170,7 +168,6 @@ export default function ProfilePage() {
                   </button>
                 </div>
                 {!!urlError && <p className="mt-1 text-xs text-red-600">{urlError}</p>}
-               
               </form>
             )}
 
@@ -225,11 +222,17 @@ export default function ProfilePage() {
       <div className={`w-full ${wide ? 'max-w-6xl' : 'max-w-2xl'} bg-white rounded-lg shadow-md`}>
         {/* Tabs */}
         <div className="flex border-b px-6 pt-4 space-x-6">
-          <button className={tabClasses('profile')} onClick={() => setActiveTab('profile')}>Profile</button>
+          <button className={tabClasses('profile')} onClick={() => setActiveTab('profile')}>
+            Profile
+          </button>
           {isAdmin && (
             <>
-              <button className={tabClasses('products')} onClick={() => setActiveTab('products')}>Product Items</button>
-              <button className={tabClasses('users')} onClick={() => setActiveTab('users')}>Users</button>
+              <button className={tabClasses('products')} onClick={() => setActiveTab('products')}>
+                Product Items
+              </button>
+              <button className={tabClasses('users')} onClick={() => setActiveTab('users')}>
+                Users
+              </button>
             </>
           )}
         </div>

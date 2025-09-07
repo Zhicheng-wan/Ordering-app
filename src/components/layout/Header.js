@@ -1,8 +1,7 @@
 'use client';
 import Link from 'next/link';
-import {useSession} from 'next-auth/react';
-import {signOut} from 'next-auth/react';
-
+import { useSession } from 'next-auth/react';
+import { signOut } from 'next-auth/react';
 
 export default function Header() {
   const session = useSession();
@@ -10,7 +9,7 @@ export default function Header() {
   const status = session.status;
   const userData = session.data?.user;
   let userName = userData?.name || userData?.email;
-  if (userName && userName.includes(' ')){
+  if (userName && userName.includes(' ')) {
     userName = userName.split(' ')[0]; // Use only the first name
   }
 
@@ -23,30 +22,35 @@ export default function Header() {
             POP MART
           </Link>
           <Link href="/">Home</Link>
-          <Link href="/">Products</Link>
-          <Link href="/">About</Link>
-          <Link href="/">Contact</Link>
+          <Link href="/products">Products</Link>
+          <Link href="/about">About</Link>
+          <Link href="/contact">Contact</Link>
         </nav>
 
         {/* Right Nav: Auth Links */}
         <nav className="flex items-center gap-4 text-black font-semibold">
           {status === 'authenticated' && (
             <>
-              <Link href={'/profile'} className="cursor-pointer whitespace-nowrap"> 
-                Hello, {userName} 
+              <Link href={'/profile'} className="cursor-pointer whitespace-nowrap">
+                Hello, {userName}
               </Link>
-              <button 
+              <button
                 onClick={() => signOut({ callbackUrl: '/' })}
-                className="cursor-pointer bg-primary rounded-full px-6 py-2 text-white ">
+                className="cursor-pointer bg-primary rounded-full px-6 py-2 text-white "
+              >
                 Logout
               </button>
             </>
-            
           )}
           {status === 'unauthenticated' && (
             <>
-              <Link href="/login" className="cursor-pointer">Login</Link>
-              <Link href="/register" className="cursor-pointer bg-primary rounded-full px-6 py-2 text-white">
+              <Link href="/login" className="cursor-pointer">
+                Login
+              </Link>
+              <Link
+                href="/register"
+                className="cursor-pointer bg-primary rounded-full px-6 py-2 text-white"
+              >
                 Register
               </Link>
             </>

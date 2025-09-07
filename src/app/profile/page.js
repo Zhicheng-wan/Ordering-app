@@ -147,16 +147,7 @@ export default function ProfilePage() {
                 />
               </label>
 
-              <button
-                type="button"
-                onClick={() => {
-                  setShowUrlBox((v) => !v);
-                  setUrlError('');
-                }}
-                className="px-3 py-1.5 text-sm rounded-md border border-gray-300 bg-white hover:bg-gray-50"
-              >
-                {showUrlBox ? 'Cancel URL' : 'Paste Image URL'}
-              </button>
+              
             </div>
 
             {showUrlBox && (

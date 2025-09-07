@@ -250,18 +250,7 @@ export default function AdminUsersPage() {
                   height={48}
                   style={{ width: 48, height: 48 }}
                 />
-                <div className="text-xs text-gray-500">Paste an image URL below to change avatar.</div>
               </div>
-
-              <label className="block">
-                <span className="block text-sm mb-1">Image URL</span>
-                <input
-                  type="url"
-                  value={image}
-                  onChange={(e) => setImage(e.target.value)}
-                  className="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                />
-              </label>
 
               <label className="block">
                 <span className="block text-sm mb-1">Name</span>

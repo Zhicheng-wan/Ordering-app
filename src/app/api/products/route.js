@@ -12,3 +12,10 @@ export async function POST(request) {
     return Response.json(menuItemDoc)
 
 }
+
+
+export async function GET() {
+  await mongoose.connect(process.env.MONGO_URI);
+  const items = await MenuItem.find().sort({ createdAt: -1 });
+  return Response.json(items, { headers: { 'Cache-Control': 'no-store' } });
+}

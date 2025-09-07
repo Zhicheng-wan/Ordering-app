@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
+import { useCart } from '@/context/CartContext';
 
 /**
  * Products Page
@@ -18,6 +19,8 @@ export default function ProductsPage() {
   // Filter state
   const [activeFilter, setActiveFilter] = useState('all'); // 'all' | 'cat:<name>' | 'price:<range>'
   const [usingCategories, setUsingCategories] = useState(false);
+
+  const { add } = useCart();
 
   useEffect(() => {
     (async () => {
@@ -81,7 +84,7 @@ export default function ProductsPage() {
 
   function handleAddToCart(product) {
     // Hook up to your cart later; for now, just a friendly toast/alert
-    alert(`Added "${product.name}" to cart!`);
+    add(product, 1);
   }
 
   return (

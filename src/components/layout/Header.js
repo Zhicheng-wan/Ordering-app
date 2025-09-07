@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import { signOut } from 'next-auth/react';
+import CartButton from '@/components/cart/CartButton';
 
 export default function Header() {
   const session = useSession();
@@ -55,6 +56,7 @@ export default function Header() {
               </Link>
             </>
           )}
+          <CartButton />
         </nav>
       </div>
     </header>

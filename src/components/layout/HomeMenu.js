@@ -31,7 +31,7 @@ export default function HomeMenu() {
       <div className="container mx-auto">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-4xl font-bold text-red-600">NEW ARRIVALS</h2>
-          <a href="" className="text-black underline text-sm">
+          <a href="/products" className="text-black underline text-sm">
             More &gt;
           </a>
         </div>
@@ -54,13 +54,6 @@ export default function HomeMenu() {
               <div className="flex flex-col justify-between min-h-[80px]">
                 <h3 className="font-semibold mt-1 text-md px-2 overflow-hidden">{product.title}</h3>
                 <p className="text-red-600 text-lg font-bold mt-2">{product.price}</p>
-              </div>
-
-              {/* Button pushed to bottom */}
-              <div className="mt-auto pt-4">
-                <button className="bg-primary items-center text-sm uppercase flex justify-center gap-2 text-white px-4 py-2 rounded-full font-semibold mx-auto">
-                  Add to Bag
-                </button>
               </div>
             </div>
           ))}

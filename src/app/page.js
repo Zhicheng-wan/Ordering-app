@@ -1,11 +1,12 @@
 import Hero from '@/components/layout/Hero';
 import HomeMenu from '@/components/layout/HomeMenu';
-import SectionHeaders from '@/components/layout/SectionHeaders';
 
 export default function Home() {
   return (
     <>
+      <div className="py-9" /> {/* Spacer */}
       <Hero />
+      <div className="py-4" /> {/* Spacer */}
       <HomeMenu />
     </>
   );

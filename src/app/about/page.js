@@ -2,7 +2,7 @@ import SectionHeaders from '@/components/layout/SectionHeaders';
 
 export default function About() {
   return (
-    <section className="text-center my-50">
+    <section className="text-center my-30">
       <SectionHeaders title="Our Story" subtitle="About Us" />
       <div className="max-w-2xl flex flex-col items-center mx-auto gap-4">
         <p>

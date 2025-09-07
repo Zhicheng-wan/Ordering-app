@@ -35,6 +35,18 @@ export default function CartPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+      {/* Hide default number spinners globally (Chrome/Firefox) */}
+      <style jsx global>{`
+        input[type='number']::-webkit-outer-spin-button,
+        input[type='number']::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+        input[type='number'] {
+          -moz-appearance: textfield;
+        }
+      `}</style>
+
       <header className="mb-8 flex items-center justify-between">
         <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight">Your Cart</h1>
         <Link href="/products" className="text-sm font-semibold text-red-600 hover:text-red-700">
@@ -64,27 +76,48 @@ export default function CartPage() {
                   <p className="text-sm text-gray-500">${Number(it.price).toFixed(2)}</p>
                 </div>
 
-                {/* Quantity (no +/- buttons) */}
-                <label className="flex items-center gap-2 shrink-0">
+                {/* Quantity with - [input] + controls (spinners hidden) */}
+                <div className="flex items-center gap-3 shrink-0">
                   <span className="text-sm text-gray-600">Quantity</span>
-                  <input
-                    type="number"
-                    inputMode="numeric"
-                    min="1"
-                    value={it.qty}
-                    onChange={(e) => {
-                      const n = Math.max(1, Number(e.target.value || 1));
-                      if (!Number.isNaN(n)) setQty(it.productId, n);
-                    }}
-                    onBlur={(e) => {
-                      if (!e.target.value || Number(e.target.value) < 1) {
-                        setQty(it.productId, 1);
-                      }
-                    }}
-                    className="w-20 text-center border rounded-md py-1"
-                    aria-label={`Quantity for ${it.name}`}
-                  />
-                </label>
+
+                  <div className="inline-flex items-stretch overflow-hidden rounded-md border border-gray-300">
+                    <button
+                      type="button"
+                      aria-label={`Decrease quantity for ${it.name}`}
+                      className="px-3 py-1.5 text-base leading-none hover:bg-gray-50"
+                      onClick={() => setQty(it.productId, Math.max(1, (it.qty || 1) - 1))}
+                    >
+                      −
+                    </button>
+
+                    <input
+                      type="number"
+                      inputMode="numeric"
+                      min="1"
+                      value={it.qty}
+                      onChange={(e) => {
+                        const n = Math.max(1, Number(e.target.value || 1));
+                        if (!Number.isNaN(n)) setQty(it.productId, n);
+                      }}
+                      onBlur={(e) => {
+                        if (!e.target.value || Number(e.target.value) < 1) {
+                          setQty(it.productId, 1);
+                        }
+                      }}
+                      aria-label={`Quantity for ${it.name}`}
+                      className="w-16 text-center outline-none border-l border-r border-gray-300"
+                    />
+
+                    <button
+                      type="button"
+                      aria-label={`Increase quantity for ${it.name}`}
+                      className="px-3 py-1.5 text-base leading-none hover:bg-gray-50"
+                      onClick={() => setQty(it.productId, (it.qty || 1) + 1)}
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
 
                 <div className="w-24 text-right font-semibold tabular-nums">
                   ${(it.price * it.qty).toFixed(2)}
@@ -125,9 +158,7 @@ export default function CartPage() {
                 </div>
                 <div className="flex justify-between">
                   <dt className="text-gray-600">Shipping</dt>
-                  <dd className="font-medium">
-                    {shipping === 0 ? 'Free' : `$${shipping.toFixed(2)}`}
-                  </dd>
+                  <dd className="font-medium">{shipping === 0 ? 'Free' : `$${shipping.toFixed(2)}`}</dd>
                 </div>
               </dl>
 

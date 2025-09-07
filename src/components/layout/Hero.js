@@ -38,7 +38,6 @@ export default function Hero() {
         loop
         playsInline
         preload="metadata"
-        poster="/hero-poster.jpg"
         aria-hidden="true"
       >
         <source src="/hero.mp4" type="video/mp4" />

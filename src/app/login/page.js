@@ -30,10 +30,40 @@ export default function LoginPage() {
     }
   }
 
+  function fillDemo() {
+    setEmail('admin@gmail.com');
+    setPassword('admin');
+  }
+
   return (
     <div className="flex items-center justify-center min-h-screen">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
         <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
+
+        {/* Demo admin note */}
+        <div className="mb-6 rounded-lg border border-yellow-200 bg-yellow-50 px-4 py-3 text-sm text-yellow-800">
+          <div className="font-semibold">Demo admin:</div>
+          <div className="mt-1 grid gap-1">
+            <div>
+              <span className="font-medium">Email:</span>{' '}
+              <code className="bg-yellow-100 px-1 py-0.5 rounded">admin@gmail.com</code>
+            </div>
+            <div>
+              <span className="font-medium">Password:</span>{' '}
+              <code className="bg-yellow-100 px-1 py-0.5 rounded">admin</code>
+            </div>
+          </div>
+          <div className="mt-2 flex items-center justify-between">
+            <button
+              type="button"
+              onClick={fillDemo}
+              className="text-xs font-semibold rounded-full border border-yellow-300 px-3 py-1 hover:bg-yellow-100"
+            >
+              Fill demo credentials
+            </button>
+          </div>
+        </div>
+
         <form onSubmit={handleLogin}>
           <div className="mb-4">
             <label className="block text-sm font-medium mb-2" htmlFor="email">
@@ -48,8 +78,11 @@ export default function LoginPage() {
               id="email"
               className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary disabled:bg-gray-100 disabled:cursor-not-allowed"
               required
+              placeholder="you@example.com"
+              autoComplete="email"
             />
           </div>
+
           <div className="mb-4">
             <label className="block text-sm font-medium mb-2" htmlFor="password">
               Password
@@ -63,8 +96,11 @@ export default function LoginPage() {
               id="password"
               className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary disabled:bg-gray-100 disabled:cursor-not-allowed"
               required
+              placeholder="••••••••"
+              autoComplete="current-password"
             />
           </div>
+
           <button
             disabled={loginInProgress}
             type="submit"
